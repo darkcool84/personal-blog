@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>개인 개발 블로그</h1>
+			<p>Astro의 빠른 정적 페이지와 React의 상호작용, MDX 기반 글쓰기를 함께 사용하는 블로그입니다.</p>
+			<p><a href="/blog/using-mdx/">React가 포함된 MDX 예제 글 보기 →</a></p>
+			<h2>프로젝트 구성</h2>
+			<ul>
+				<li>Astro 정적 사이트 생성</li>
+				<li>React 아일랜드 컴포넌트</li>
+				<li>Markdown 및 MDX 콘텐츠 컬렉션</li>
+				<li>GitHub Actions와 Azure Static Web Apps 배포</li>
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

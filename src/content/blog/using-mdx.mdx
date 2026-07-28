@@ -1,0 +1,18 @@
+---
+title: 'Astro에서 React와 MDX 함께 사용하기'
+description: 'MDX 글 안에서 React 아일랜드를 사용하는 기본 예제'
+pubDate: 'Jul 29 2026'
+heroImage: '../../assets/blog-placeholder-5.jpg'
+---
+
+import Counter from '../../components/Counter';
+
+이 글은 Markdown 문법으로 작성하면서 React 컴포넌트를 직접 포함하는 MDX 예제입니다.
+
+## React 아일랜드
+
+아래 카운터는 페이지 전체가 아니라 컴포넌트만 브라우저에서 실행됩니다.
+
+<Counter client:visible />
+
+`client:visible` 지시자는 컴포넌트가 화면에 들어올 때 React 코드를 로드합니다. 나머지 글은 Astro가 빌드 시 정적 HTML로 생성합니다.
