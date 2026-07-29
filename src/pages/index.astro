@@ -1,8 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latestPosts = posts.slice(0, 3);
+const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
 ---
 
 <!doctype html>
@@ -12,18 +23,487 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>개인 개발 블로그</h1>
-			<p>Astro의 빠른 정적 페이지와 React의 상호작용, MDX 기반 글쓰기를 함께 사용하는 블로그입니다.</p>
-			<p><a href="/blog/using-mdx/">React가 포함된 MDX 예제 글 보기 →</a></p>
-			<h2>프로젝트 구성</h2>
-			<ul>
-				<li>Astro 정적 사이트 생성</li>
-				<li>React 아일랜드 컴포넌트</li>
-				<li>Markdown 및 MDX 콘텐츠 컬렉션</li>
-				<li>GitHub Actions와 Azure Static Web Apps 배포</li>
-			</ul>
+		<main class="home">
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="hero-copy">
+					<p class="eyebrow">BUILD · PLAY · INVEST</p>
+					<h1 id="hero-title">개발하고,<br /><span>즐기고, 분석합니다.</span></h1>
+					<p class="hero-description">
+						기술을 깊이 들여다보고, 좋아하는 것들을 오래 기록하며,<br class="desktop-only" />
+						시장을 숫자와 근거로 이해해 가는 개인 블로그입니다.
+					</p>
+					<div class="hero-actions">
+						<a class="primary-action" href="/blog/">전체 글 보기</a>
+						<a class="text-action" href="/about/">블로그 소개 <span aria-hidden="true">→</span></a>
+					</div>
+				</div>
+				<div class="hero-note" aria-label="블로그 기록 현황">
+					<span class="note-label">ARCHIVE</span>
+					<strong>{posts.length.toString().padStart(2, '0')}</strong>
+					<span>개의 기록과<br />계속 이어질 생각들</span>
+				</div>
+			</section>
+
+			<section class="topics" aria-labelledby="topics-title">
+				<div class="section-heading">
+					<p class="section-kicker">WHAT I WRITE</p>
+					<h2 id="topics-title">관심사를 깊이 있게 기록합니다</h2>
+				</div>
+
+				<div class="topic-grid">
+					<article class="topic-card topic-development">
+						<div class="topic-number">01</div>
+						<div>
+							<p class="topic-label">DEVELOPMENT</p>
+							<h3>개발 · 기술 분석</h3>
+							<p>새로운 기술을 직접 사용해 보고, 원리와 선택의 근거를 코드와 함께 정리합니다.</p>
+							<ul aria-label="개발 기술 주제">
+								<li>프로그래밍</li>
+								<li>아키텍처</li>
+								<li>도구와 경험</li>
+							</ul>
+						</div>
+					</article>
+
+					<article class="topic-card topic-hobby">
+						<div class="topic-number">02</div>
+						<div>
+							<p class="topic-label">OFF THE CLOCK</p>
+							<h3>취미 · 생활</h3>
+							<p>일상에 영감을 주는 취향과 경험을 솔직하게 남깁니다.</p>
+							<ul aria-label="취미 생활 주제">
+								<li>게임</li>
+								<li>만화와 책</li>
+								<li>캠핑</li>
+							</ul>
+						</div>
+					</article>
+
+					<article class="topic-card topic-investment">
+						<div class="topic-number">03</div>
+						<div>
+							<p class="topic-label">MARKET NOTES</p>
+							<h3>주식 · 기업 분석</h3>
+							<p>기업의 사업과 숫자를 살펴보고, 시장에 대한 생각을 차분하게 기록합니다.</p>
+							<ul aria-label="주식 분석 주제">
+								<li>기업 분석</li>
+								<li>산업 흐름</li>
+								<li>투자 기록</li>
+							</ul>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="latest" aria-labelledby="latest-title">
+				<div class="section-heading latest-heading">
+					<div>
+						<p class="section-kicker">LATEST NOTES</p>
+						<h2 id="latest-title">최근 기록</h2>
+					</div>
+					<a href="/blog/">모든 글 보기 <span aria-hidden="true">→</span></a>
+				</div>
+
+				<div class="post-list">
+					{
+						latestPosts.map((post, index) => (
+							<a class="post-item" href={`/blog/${post.id}/`}>
+								<span class="post-index">{String(index + 1).padStart(2, '0')}</span>
+								<div class="post-copy">
+									<time datetime={post.data.pubDate.toISOString()}>
+										{dateFormatter.format(post.data.pubDate)}
+									</time>
+									<h3>{post.data.title}</h3>
+									<p>{post.data.description}</p>
+								</div>
+								<span class="post-arrow" aria-hidden="true">↗</span>
+							</a>
+						))
+					}
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.home {
+		width: min(1180px, calc(100% - 3rem));
+		max-width: none;
+		padding: 0 0 5rem;
+	}
+
+	.hero {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 230px;
+		gap: 4rem;
+		align-items: end;
+		min-height: 560px;
+		padding: 5.5rem 0 4.5rem;
+		border-bottom: 1px solid rgba(var(--gray), 24%);
+	}
+
+	.hero::before {
+		position: absolute;
+		top: 4.5rem;
+		right: 2rem;
+		width: 210px;
+		height: 210px;
+		border: 1px solid rgba(35, 55, 255, 20%);
+		border-radius: 50%;
+		content: '';
+	}
+
+	.hero::after {
+		position: absolute;
+		top: 7.5rem;
+		right: 5rem;
+		width: 150px;
+		height: 150px;
+		background: rgba(35, 55, 255, 7%);
+		border-radius: 50%;
+		content: '';
+	}
+
+	.hero-copy,
+	.hero-note {
+		position: relative;
+		z-index: 1;
+	}
+
+	.eyebrow,
+	.section-kicker,
+	.topic-label,
+	.note-label {
+		margin: 0 0 1rem;
+		color: var(--accent);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+	}
+
+	.hero h1 {
+		max-width: 850px;
+		margin: 0;
+		font-size: clamp(3.4rem, 7.3vw, 6.5rem);
+		letter-spacing: -0.055em;
+		line-height: 0.98;
+	}
+
+	.hero h1 span {
+		color: transparent;
+		-webkit-text-stroke: 1.5px rgb(var(--black));
+	}
+
+	.hero-description {
+		max-width: 660px;
+		margin: 2rem 0 0;
+		color: rgb(var(--gray));
+		font-size: 1.05rem;
+		line-height: 1.75;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1.5rem;
+		align-items: center;
+		margin-top: 2.5rem;
+	}
+
+	.primary-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 48px;
+		padding: 0 1.4rem;
+		background: rgb(var(--black));
+		color: white;
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.primary-action:hover {
+		background: var(--accent);
+		color: white;
+	}
+
+	.text-action {
+		color: rgb(var(--gray-dark));
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.text-action span {
+		margin-left: 0.35rem;
+		transition: margin-left 160ms ease;
+	}
+
+	.text-action:hover span {
+		margin-left: 0.65rem;
+	}
+
+	.hero-note {
+		padding: 1.5rem 0 0 1.5rem;
+		border-top: 2px solid rgb(var(--black));
+	}
+
+	.hero-note span {
+		display: block;
+		color: rgb(var(--gray));
+		font-size: 0.75rem;
+		line-height: 1.5;
+	}
+
+	.hero-note strong {
+		display: block;
+		margin: 0.2rem 0;
+		color: rgb(var(--black));
+		font-size: 3.7rem;
+		letter-spacing: -0.08em;
+		line-height: 1;
+	}
+
+	.topics,
+	.latest {
+		padding-top: 6.5rem;
+	}
+
+	.section-heading {
+		margin-bottom: 2.5rem;
+	}
+
+	.section-heading h2 {
+		max-width: 680px;
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 3.35rem);
+		letter-spacing: -0.045em;
+	}
+
+	.topic-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.topic-card {
+		position: relative;
+		min-height: 370px;
+		padding: 2rem;
+		overflow: hidden;
+		background: #fff;
+		border: 1px solid rgba(var(--gray), 18%);
+		transition: transform 180ms ease, box-shadow 180ms ease;
+	}
+
+	.topic-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 18px 38px rgba(var(--black), 9%);
+	}
+
+	.topic-number {
+		margin-bottom: 3.5rem;
+		color: rgba(var(--gray), 55%);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+	}
+
+	.topic-card h3 {
+		margin-bottom: 1rem;
+		font-size: 1.55rem;
+		letter-spacing: -0.035em;
+	}
+
+	.topic-card > div > p:not(.topic-label) {
+		min-height: 5.1rem;
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.86rem;
+		line-height: 1.65;
+	}
+
+	.topic-card ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin: 1.5rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.topic-card li {
+		padding: 0.3rem 0.65rem;
+		background: rgb(var(--gray-light));
+		border-radius: 999px;
+		color: rgb(var(--gray-dark));
+		font-size: 0.67rem;
+	}
+
+	.topic-development {
+		border-top: 4px solid var(--accent);
+	}
+
+	.topic-hobby {
+		border-top: 4px solid #ec8a2d;
+	}
+
+	.topic-hobby .topic-label {
+		color: #b85e0b;
+	}
+
+	.topic-investment {
+		border-top: 4px solid #17865b;
+	}
+
+	.topic-investment .topic-label {
+		color: #14734f;
+	}
+
+	.latest-heading {
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+	}
+
+	.latest-heading a {
+		padding-bottom: 0.5rem;
+		color: rgb(var(--gray-dark));
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.post-list {
+		border-top: 2px solid rgb(var(--black));
+	}
+
+	.post-item {
+		display: grid;
+		grid-template-columns: 55px minmax(0, 1fr) 35px;
+		gap: 1rem;
+		align-items: center;
+		padding: 1.75rem 0.5rem;
+		border-bottom: 1px solid rgba(var(--gray), 25%);
+		color: inherit;
+		text-decoration: none;
+		transition: background 160ms ease, padding 160ms ease;
+	}
+
+	.post-item:hover {
+		padding-right: 1rem;
+		padding-left: 1rem;
+		background: rgba(var(--gray-light), 45%);
+	}
+
+	.post-index,
+	.post-copy time {
+		color: rgb(var(--gray));
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+	}
+
+	.post-copy h3 {
+		margin: 0.3rem 0;
+		font-size: 1.35rem;
+		letter-spacing: -0.025em;
+	}
+
+	.post-copy p {
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.8rem;
+		line-height: 1.5;
+	}
+
+	.post-arrow {
+		color: rgb(var(--black));
+		font-size: 1.2rem;
+	}
+
+	@media (max-width: 860px) {
+		.home {
+			width: min(100% - 2rem, 680px);
+		}
+
+		.hero {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+			min-height: auto;
+			padding: 4rem 0;
+		}
+
+		.hero::before,
+		.hero::after {
+			display: none;
+		}
+
+		.hero-note {
+			max-width: 230px;
+		}
+
+		.topic-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.topic-card {
+			min-height: 0;
+		}
+
+		.topic-number {
+			margin-bottom: 2rem;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.home {
+			width: calc(100% - 2rem);
+			padding: 0 0 3rem;
+		}
+
+		.hero h1 {
+			font-size: clamp(3rem, 15vw, 4.5rem);
+		}
+
+		.desktop-only {
+			display: none;
+		}
+
+		.hero-actions,
+		.latest-heading {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.topics,
+		.latest {
+			padding-top: 4.5rem;
+		}
+
+		.topic-card {
+			padding: 1.5rem;
+		}
+
+		.post-item {
+			grid-template-columns: 36px minmax(0, 1fr) 20px;
+			gap: 0.5rem;
+			padding: 1.4rem 0;
+		}
+
+		.post-copy p {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.topic-card,
+		.post-item,
+		.text-action span {
+			transition: none;
+		}
+	}
+</style>
