@@ -8,7 +8,7 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category, tags } = Astro.props;
 ---
 
 <html lang="en">
@@ -49,6 +49,28 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
 			}
+			.category {
+				display: inline-block;
+				margin-bottom: 0.75rem;
+				color: var(--accent);
+				font-size: 0.85rem;
+				font-weight: 700;
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				justify-content: center;
+				margin: 1rem 0 0;
+			}
+			.tag {
+				padding: 0.3rem 0.65rem;
+				border-radius: 999px;
+				background: rgba(var(--gray-light), 45%);
+				color: rgb(var(--gray));
+				font-size: 0.78rem;
+				font-weight: 600;
+			}
 			.last-updated-on {
 				font-style: italic;
 			}
@@ -64,6 +86,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</div>
 				<div class="prose">
 					<div class="title">
+						{category && <div class="category">{category}</div>}
 						<div class="date">
 							<FormattedDate date={pubDate} />
 							{
@@ -75,6 +98,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
+						{
+							tags.length > 0 && (
+								<div class="tags" aria-label="태그">
+									{tags.map((tag) => <span class="tag">#{tag}</span>)}
+								</div>
+							)
+						}
 						<hr />
 					</div>
 					<slot />
