@@ -122,6 +122,20 @@ const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
 					}
 				</div>
 			</section>
+
+			<section class="home-about" aria-labelledby="home-about-title">
+				<div>
+					<p class="section-kicker">WHY I WRITE</p>
+					<h2 id="home-about-title">생각은 기록할 때<br />더 선명해집니다.</h2>
+				</div>
+				<div class="home-about-copy">
+					<p>
+						빠르게 소비되는 정보보다 오래 남는 이해를 추구합니다. 직접 경험한 것, 근거를 확인한 것,
+						나중에 다시 읽을 가치가 있는 것을 씁니다.
+					</p>
+					<a href="/about/">블로그를 시작한 이유 <span aria-hidden="true">→</span></a>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
@@ -369,6 +383,38 @@ const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
 		align-items: end;
 	}
 
+	.home-about {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: end;
+		margin-top: 6.5rem;
+		padding: 4rem;
+		background: rgb(var(--black));
+		color: white;
+	}
+
+	.home-about h2 {
+		margin: 0;
+		color: white;
+		font-size: clamp(2rem, 4vw, 3.4rem);
+		letter-spacing: -0.05em;
+	}
+
+	.home-about-copy p {
+		margin: 0 0 2rem;
+		color: rgba(255, 255, 255, 62%);
+		font-size: 0.86rem;
+		line-height: 1.8;
+	}
+
+	.home-about-copy a {
+		color: white;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
 	.latest-heading a {
 		padding-bottom: 0.5rem;
 		color: rgb(var(--gray-dark));
@@ -454,6 +500,12 @@ const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
 			min-height: 0;
 		}
 
+		.home-about {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			padding: 3rem;
+		}
+
 		.topic-number {
 			margin-bottom: 2rem;
 		}
@@ -486,6 +538,11 @@ const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
 
 		.topic-card {
 			padding: 1.5rem;
+		}
+
+		.home-about {
+			margin-top: 4.5rem;
+			padding: 2rem;
 		}
 
 		.post-item {

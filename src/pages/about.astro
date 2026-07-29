@@ -1,63 +1,314 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead
+			title="블로그 소개"
+			description="개발 기술, 취미 생활, 주식과 기업 분석을 기록하는 개인 블로그를 소개합니다."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="about">
+			<section class="about-hero" aria-labelledby="about-title">
+				<p class="eyebrow">ABOUT THIS JOURNAL</p>
+				<h1 id="about-title">좋아하는 것을<br /><span>깊이 이해하기 위한 기록.</span></h1>
+				<p class="lead">
+					배운 것을 설명할 수 있을 때 비로소 내 것이 된다고 믿습니다. 이곳은 개발 과정에서 얻은
+					인사이트, 일상을 풍성하게 만드는 취미, 시장과 기업을 바라보는 생각을 차곡차곡 쌓는
+					개인 아카이브입니다.
+				</p>
+			</section>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+			<section class="purpose" aria-labelledby="purpose-title">
+				<div class="section-title">
+					<p class="eyebrow">THREE PERSPECTIVES</p>
+					<h2 id="purpose-title">세 가지 관점으로 세상을 봅니다</h2>
+				</div>
+				<div class="purpose-list">
+					<article>
+						<span>01</span>
+						<h3>기술은 원리까지</h3>
+						<p>
+							단순한 사용법보다 왜 그렇게 동작하는지, 어떤 선택이 더 적합한지 살펴봅니다. 직접
+							만들고 부딪힌 경험을 코드와 함께 남깁니다.
+						</p>
+					</article>
+					<article>
+						<span>02</span>
+						<h3>취향은 솔직하게</h3>
+						<p>
+							게임, 만화, 책, 캠핑을 즐기며 발견한 재미와 아쉬움을 기록합니다. 시간이 지나도 다시
+							꺼내 볼 수 있는 취향의 지도를 만들어 갑니다.
+						</p>
+					</article>
+					<article>
+						<span>03</span>
+						<h3>투자는 근거 있게</h3>
+						<p>
+							주가의 움직임보다 기업의 사업, 산업의 변화, 숫자에 집중합니다. 결론뿐 아니라 판단에
+							도달한 과정까지 기록합니다.
+						</p>
+					</article>
+				</div>
+			</section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<section class="principles" aria-labelledby="principles-title">
+				<div>
+					<p class="eyebrow">HOW I WRITE</p>
+					<h2 id="principles-title">기록의 원칙</h2>
+				</div>
+				<ol>
+					<li><strong>직접 경험한 것</strong><span>사용하고 읽고 분석한 내용을 중심으로 씁니다.</span></li>
+					<li><strong>근거를 확인한 것</strong><span>출처와 숫자를 확인하고 사실과 의견을 구분합니다.</span></li>
+					<li><strong>다시 읽을 수 있는 것</strong><span>미래의 나에게도 도움이 되는 밀도로 정리합니다.</span></li>
+				</ol>
+			</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+			<aside class="investment-note">
+				<p class="eyebrow">A SMALL NOTE</p>
+				<p>
+					주식 관련 글은 개인적인 학습과 기록을 위한 자료이며 투자 권유가 아닙니다. 모든 투자 판단과
+					그 결과에 대한 책임은 투자자 본인에게 있습니다.
+				</p>
+			</aside>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+			<section class="about-cta">
+				<p>지금까지 쌓인 생각들을 살펴보세요.</p>
+				<a href="/blog/">전체 글 보기 <span aria-hidden="true">→</span></a>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about {
+		width: min(1040px, calc(100% - 3rem));
+		max-width: none;
+		padding: 0 0 6rem;
+	}
+
+	.about-hero {
+		padding: 7rem 0 6rem;
+		border-bottom: 1px solid rgba(var(--gray), 25%);
+	}
+
+	.eyebrow {
+		margin: 0 0 1rem;
+		color: var(--accent);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+	}
+
+	.about-hero h1 {
+		max-width: 900px;
+		margin: 0;
+		font-size: clamp(3.4rem, 7vw, 6.2rem);
+		letter-spacing: -0.06em;
+		line-height: 1;
+	}
+
+	.about-hero h1 span {
+		color: transparent;
+		-webkit-text-stroke: 1.4px rgb(var(--black));
+	}
+
+	.lead {
+		max-width: 720px;
+		margin: 2.5rem 0 0 auto;
+		color: rgb(var(--gray-dark));
+		font-size: 1.15rem;
+		line-height: 1.9;
+	}
+
+	.purpose,
+	.principles {
+		padding: 6rem 0;
+		border-bottom: 1px solid rgba(var(--gray), 25%);
+	}
+
+	.section-title {
+		display: grid;
+		grid-template-columns: 0.75fr 1.25fr;
+		gap: 3rem;
+		margin-bottom: 4rem;
+	}
+
+	.section-title h2,
+	.principles h2 {
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 3.2rem);
+		letter-spacing: -0.045em;
+	}
+
+	.purpose-list {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1px;
+		background: rgba(var(--gray), 24%);
+		border: 1px solid rgba(var(--gray), 24%);
+	}
+
+	.purpose-list article {
+		min-height: 330px;
+		padding: 2rem;
+		background: white;
+	}
+
+	.purpose-list article > span {
+		display: block;
+		margin-bottom: 5rem;
+		color: rgb(var(--gray));
+		font-size: 0.7rem;
+		font-weight: 700;
+	}
+
+	.purpose-list h3 {
+		margin-bottom: 1rem;
+		font-size: 1.45rem;
+		letter-spacing: -0.03em;
+	}
+
+	.purpose-list p {
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.84rem;
+		line-height: 1.75;
+	}
+
+	.principles {
+		display: grid;
+		grid-template-columns: 0.75fr 1.25fr;
+		gap: 3rem;
+	}
+
+	.principles ol {
+		margin: 0;
+		padding: 0;
+		border-top: 2px solid rgb(var(--black));
+		list-style: none;
+		counter-reset: principle;
+	}
+
+	.principles li {
+		display: grid;
+		grid-template-columns: 1fr 1.4fr;
+		gap: 1.5rem;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid rgba(var(--gray), 25%);
+		counter-increment: principle;
+	}
+
+	.principles strong::before {
+		margin-right: 0.75rem;
+		color: var(--accent);
+		font-size: 0.65rem;
+		content: '0' counter(principle);
+	}
+
+	.principles strong {
+		font-size: 0.88rem;
+	}
+
+	.principles span {
+		color: rgb(var(--gray));
+		font-size: 0.78rem;
+		line-height: 1.65;
+	}
+
+	.investment-note {
+		max-width: 760px;
+		margin: 5rem 0 5rem auto;
+		padding: 2rem;
+		background: rgba(23, 134, 91, 8%);
+		border-left: 4px solid #17865b;
+	}
+
+	.investment-note .eyebrow {
+		color: #14734f;
+	}
+
+	.investment-note > p:last-child {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+		font-size: 0.82rem;
+		line-height: 1.75;
+	}
+
+	.about-cta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 2.5rem 0;
+		border-top: 2px solid rgb(var(--black));
+		border-bottom: 2px solid rgb(var(--black));
+	}
+
+	.about-cta p {
+		margin: 0;
+		font-size: 1.15rem;
+		font-weight: 700;
+	}
+
+	.about-cta a {
+		color: rgb(var(--black));
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	@media (max-width: 760px) {
+		.about {
+			width: calc(100% - 2rem);
+		}
+
+		.about-hero {
+			padding: 4.5rem 0;
+		}
+
+		.lead {
+			font-size: 1rem;
+		}
+
+		.section-title,
+		.principles {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.purpose,
+		.principles {
+			padding: 4.5rem 0;
+		}
+
+		.purpose-list {
+			grid-template-columns: 1fr;
+		}
+
+		.purpose-list article {
+			min-height: 0;
+		}
+
+		.purpose-list article > span {
+			margin-bottom: 2rem;
+		}
+
+		.principles li {
+			grid-template-columns: 1fr;
+			gap: 0.5rem;
+		}
+
+		.about-cta {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 1rem;
+		}
+	}
+</style>
