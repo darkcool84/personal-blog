@@ -71,8 +71,50 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } = 
 				font-size: 0.78rem;
 				font-weight: 600;
 			}
+			:global(.prose table) {
+				display: block;
+				width: 100%;
+				margin: 1.5rem 0 2rem;
+				overflow-x: auto;
+				border-collapse: collapse;
+				font-size: 0.9rem;
+			}
+			:global(.prose th),
+			:global(.prose td) {
+				min-width: 9rem;
+				padding: 0.75rem 0.85rem;
+				border: 1px solid rgb(var(--gray-light));
+				text-align: left;
+				vertical-align: top;
+			}
+			:global(.prose th) {
+				background: rgba(var(--gray-light), 45%);
+				color: rgb(var(--black));
+			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			@media (max-width: 720px) {
+				.prose {
+					max-width: calc(100% - 1em);
+					padding: 0.5em;
+				}
+				.title h1 {
+					font-size: 2rem;
+					line-height: 1.25;
+				}
+				:global(.prose h2) {
+					margin-top: 2.25rem;
+					font-size: 1.65rem;
+					line-height: 1.3;
+				}
+				:global(.prose h3) {
+					font-size: 1.35rem;
+					line-height: 1.35;
+				}
+				:global(.prose table) {
+					font-size: 0.82rem;
+				}
 			}
 		</style>
 	</head>
